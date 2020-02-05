@@ -1,0 +1,25 @@
+.navbar {
+  box-shadow: none;
+
+  .brand {
+    margin-top: 1.25rem;
+    padding: 0 1.5rem;
+    display: inline-block;
+    font-weight: 800;
+  }
+
+  &-end {
+    label {
+      margin-top: 15px;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.main-wrapper {
+  position: relative;
+  padding: 0 5% 0 5%;
+  width: 100%;
+  min-height: 100vh;
+  transition: padding 0.3s ease-in-out;
+}

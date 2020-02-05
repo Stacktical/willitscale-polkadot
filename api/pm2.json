@@ -1,0 +1,26 @@
+{
+    "apps" : [
+        {
+            "name"        : "willitscale-api",
+            "script"      : "dist/main.js",
+            "instances"   : "1",
+            "watch": false,
+            "env": {
+                "NODE_ENV": "default",
+                "PORT": 10000
+            },
+            "env_development": {
+                "NODE_ENV": "development",
+                "PORT": 10000
+            },
+            "env_staging": {
+                "NODE_ENV": "staging",
+                "PORT": 10000
+            },
+            "env_production" : {
+                "NODE_ENV": "production",
+                "PORT": 10000
+            }
+        }
+    ]
+}

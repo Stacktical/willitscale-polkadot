@@ -1,0 +1,44 @@
+// Brand
+$primary-color-darker: #145CA4;
+$primary-color-dark: #1976D2;
+$primary-color: #353434;
+$primary-color-light: #BBDEFB;
+$accent-color: #8BC34A;
+$accent-color-light: #A4D070;
+$primary-text-color: #3D4752;
+$secondary-text-color: #4B5865;
+$alt-text-color: #FFF;
+$cta-color: #ffb347;
+
+
+// Backgrounds
+$background-color: #d9d6d6;
+$background-color-light: #FEFEFE;
+$background-color-dark: #EAEAEA;
+
+// Alerts
+$info-primary-color-dark: #0288D1;
+$info-primary-color: #03A9F4;
+$info-primary-color-light: #B3E5FC;
+
+$success-primary-color-dark: #689F38;
+$success-primary-color: #8BC34A;
+$success-primary-color-light: #DCEDC8;
+
+$warning-primary-color-dark: #e5ce00;
+$warning-primary-color: #FFEB3B;
+$warning-primary-color-light: #FFF9C4;
+
+$danger-primary-color-dark: #D32F2F;
+$danger-primary-color: #F44336;
+$danger-primary-color-light: #FFCDD2;
+
+// Bulma Override
+$primary: $primary-color;
+$info: $info-primary-color;
+$success: $success-primary-color;
+$warning: $warning-primary-color;
+$danger: $danger-primary-color;
+
+$navbar-background-color: transparent;
+$navbar-box-shadow-color: transparent;

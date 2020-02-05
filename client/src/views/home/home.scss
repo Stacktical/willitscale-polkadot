@@ -1,0 +1,17 @@
+.home {
+  background: #fff;
+
+  &__simulation {
+    position: relative;
+    color: $primary-text-color;
+    background: #fafafa;
+  }
+  
+  &__chart {
+      color: $alt-text-color;
+      
+      h2 {
+        padding: 20px 25px;
+      }
+  }
+}

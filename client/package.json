@@ -1,0 +1,88 @@
+{
+  "name": "willitscale-client",
+  "version": "0.0.1",
+  "dependencies": {
+    "@types/graphql": "^14.2.0",
+    "apollo-cache-inmemory": "^1.6.1",
+    "apollo-client": "^2.6.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-http": "^1.5.14",
+    "bulma": "^0.7.4",
+    "bulmaswatch": "^0.7.2",
+    "chart.js": "^2.8.0",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
+    "install": "^0.12.2",
+    "moment": "^2.24.0",
+    "numeral": "^2.0.6",
+    "vue": "^2.6.6",
+    "vue-chartjs": "^3.4.2",
+    "vue-class-component": "^6.3.2",
+    "vue-property-decorator": "^7.3.0",
+    "vue-router": "^3.0.2",
+    "vue-typer": "^1.2.0",
+    "vuex": "^3.1.0",
+    "vuex-class": "^0.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-plugin-typescript": "^3.4.0",
+    "@vue/cli-plugin-unit-mocha": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/eslint-config-typescript": "^4.0.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-graphql-tag": "^2.4.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.15.1",
+    "eslint-plugin-html": "^5.0.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "lint-staged": "^8.1.4",
+    "node-sass": "^4.13.1",
+    "postcss-sorting": "^5.0.0",
+    "prettier": "^1.18.2",
+    "sass-loader": "^7.1.0",
+    "typescript": "~3.3.3",
+    "vue-template-compiler": "^2.6.6",
+    "webpack": "^4.0.0"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "author": {
+    "name": "Stacktical (DSLA Protocol)",
+    "email": "contact@stacktical.com",
+    "url": "https://stacktical.com"
+  },
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ]
+}

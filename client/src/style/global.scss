@@ -1,0 +1,57 @@
+@import "./bulma.custom.scss";
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap");
+@import url("https://use.fontawesome.com/releases/v5.9.0/css/all.css");
+
+html,
+body {
+  font-family: "Nunito Sans", serif;
+  font-weight: 200;
+  color: $primary-text-color;
+  background-color: $background-color;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-weight: 700;
+  @include font-smoothing(on);
+}
+
+h2,
+h3,
+h4,
+h5  {
+  font-weight: 400;
+  @include font-smoothing(on);
+}
+
+h2 {
+  i.fas {
+    width: 48px;
+    text-align: center;
+  }
+}
+
+a {
+  color: $primary;
+  transform: translateZ(0);
+  transition: 0.3s ease;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+p {
+  color: $secondary-text-color;
+  font-weight: 300;
+  @include font-smoothing(on);
+}
+
+hr {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid $background-color-dark;
+}
+
+.button {
+  font-weight: 700;
+}
