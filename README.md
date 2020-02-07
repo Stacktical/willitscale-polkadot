@@ -1,10 +1,10 @@
 # But will it scale ?
 
-`"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**.
+`"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**. This open source development initiative is the result of the combined efforts of the [Stacktical (DSLA Protocol)](https://stacktical.com) and Parity / Polkadot teams.
 
 ## Objective
 
-The initial objective of this project is to surface mathematical relation between the performance metrics of blockchain networks, with a focus on [Substrate](https://substrate.dev/) / [Polkadot](https://polkadot.network/), the driving forces of interoperability in the space (ergo increasingly complex, end-to-end testing scenarios).
+The initial objective of this project is to surface mathematical relations between the performance metrics of blockchain networks, with a focus on [Polkadot](https://polkadot.network/), the driving force of interoperability in the blockchain industry (ergo the foundation of increasingly complex, end-to-end, cross-chain testing scenarios).
 
 When the value of two system metrics seem to vary in relation to each other, it becomes possible to use them as mathematical coordinates, and fit these coordinates into predictive mathematical models. 
 
@@ -20,26 +20,14 @@ This also means that the `"Will it scale ?"` platform can serve as a tool to sci
 
 ![grant_w3f](resources/grant_w3f.png)
 
-## When predictions fail
+## General Requirements
 
-Nobel Prize recipient and quantum physicist Niels Bohr used to say that **"Prediction is very difficult, especially when it's about the future."**
+`"Will it scale ?"`  is meant to work on Linux and Mac OS machines with:   
 
-In the realm of Data Science, it's important to embrace that predictions can fail. In our experience, there are two main reasons for that :
+* a [Node.js 10.0+](https://nodejs.org/) runtime environment to execute applications and manage dependencies
+* a [Docker 2.0+](https://docs.docker.com/) installation to build and manage application containers
 
-**1. Bad performance measurements**
-
-Predictions can fail if they detect uncommon patterns in the performance measurements they process. It is important to always chart your measurements once, and remove noisy coordinates from your mesurements, before submitting them to the predictive engine.
-
-Sometimes, what appears to be a clean set of measurements is in fact a perfectly wrong series of measurements.
-Rethinking your entire performance testing protocol might help in such case.
-
-**2. Wrong mathematical models**
-
-Predictions can fail if we try to fit performance measurements to the wrong mathematical models, or if we use the wrong mathematical functions to this model in the code (e.g. `nls` versus `nlxb` nonlinear regression functions in R).
-
-In the future, it would make sense to increase the number of mathematical models available in this repository.
-
-## General architecture
+## Platform Architecture
 
 The projects is comprised of three main components.
 
@@ -51,19 +39,13 @@ A HTTP R server to make online predictive analysis using mathematical models.
 
 A Node.js GraphQL API server to query the `willitscale-r-server` and implements the business logic of predictions.
 
-### `willitscale-client` (optional)
+### `willitscale-client`
 
 A Vue.js GraphQL API client, to submit performance test results to the `willitiscale-api` from your browser.
 
 You will need to build and run these components to run your end-to-end predictions scenarios.
 
-## Input data
-
-To answer the `"Will it scale ?"` question, the Platform needs to be fed with performance measurements formatted as a JSON. All available predictions are currently using the demo dataset in Vienna's Technical University student M. Schäffer's whitepaper about the "Performance and Scalability of Private Ethereum Blockchains". 
-
-More demo dataset from different applications, networks and systems will be added at a later stage (e.g. Substrate / Polkadot performance measurements).
-
-![research_m-schaffer_tuw.jpg](resources/research_m-schaffer_tuw.jpg)
+# Local Deployment
 
 ## willitscale-r-server
 
@@ -170,32 +152,6 @@ Here is what the console looks like when you run a prediction:
 
 ![willitiscale-api.png](resources/willitscale-api.png)
 
-### API documentation
-
-Your server documentation is available in the GraphQL Playground. Two predictive queries are available at this stage:
-
-- A **`predictCapacity`** GraphQL mutation returning:
-
-  - The network’s `nodes vs throughput` (scalability) chart points
-  - The network’s `peak capacity` point
-  - Quantified scalability bottlenecks (contention / coherency)
-
-- A **`predictLatency`** GraphQL mutation returning:
-  - The network’s `nodes vs latency` chart points
-
-We originally planned on returning the network’s `latency at peak capacity` point, from the `predictLatency` mutation.
-
-Instead, we built `willitscale-client` so that this point is directly visible on a chart, and we started implementing a metric-agnostic `makePrediction` mutation in `willitscale-api` that will ultimately serve the same purpose in a wider variety of scenarios (e.g. predicting the network's throughput (Xp) for a given concurrency (p)).
-
-### Contention / Coherency bottlenecks
-
-All systems experience contention and coherency penalties. The mathematical models we are using lets you quantify these penalties, to surface general areas of improvement of the system's scalability.
-
-Contention is a state of conflict over access to a shared resource (e.g conflicting DApp transactions accessing the same data region). It forces transactions to be dealt with in a serialized way.   
-
-Coherency is a state where the data in a cache is up to date with the system's memory. Ensuring it requires extra, costly synchronisation efforts from your system.
-
-We would suggest adding scalability bottlenecks checks to a CI/CD pipeline, to validate the scalability of builds before they're deployed to production.
 
 ## willitscale-client (optional)
 
@@ -216,16 +172,109 @@ Your client should be now running at **[http://localhost:8080](http://localhost:
 
 ![willitiscale-client.png](resources/willitscale-client.png)
 
+# Remote Deployment
+
+## Requirements
+
+A functional Kubernetes cluster (GKE, EKS, minikube, etc) accessible through kubectl, to orchestrate the platform containers.
+
+## Create a new deployment
+
+To create a new deployment run the following command from the root folder of this repository:  
+
+`kubectl create -f ops/kubernetes.deployment.yaml`
+
+This will automatically pull the  `willitscale-r-server` and `willitscale-api` from the Docker registry.
+
+## Access the remote cluster locally
+
+If you still want the GraphQL Playground to be reachable locally at `http://localhost:10000`, use:  
+
+` kubectl port-forward svc/willitscale-api 10000:10000`
+
+The Playground is now reachable at [http://localhost:10000/](http://localhost:10000/), and forwarding your request to the remote `willitscale-api`.
+
+# API documentation
+
+Your server documentation is available in the GraphQL Playground. Two predictive queries are available at this stage:
+
+- A **`predictCapacity`** GraphQL mutation returning:
+
+  - The network’s `nodes vs throughput` (scalability) chart points
+  - The network’s `peak capacity` point
+  - Quantified scalability bottlenecks (contention / coherency)
+
+- A **`predictLatency`** GraphQL mutation returning:
+  - The network’s `nodes vs latency` chart points
+
+We originally planned on returning the network’s `latency at peak capacity` point, from the `predictLatency` mutation.
+
+Instead, we built `willitscale-client` so that this point is directly visible on a chart, and we started implementing a metric-agnostic `makePrediction` mutation in `willitscale-api` that will ultimately serve the same purpose in a wider variety of scenarios (e.g. predicting the network's throughput (Xp) for a given concurrency (p)).
+
+# About Predictions
+
+## Measurements used in predictions
+
+To answer the `"Will it scale ?"` question, the Platform needs to be fed with performance measurements formatted as a JSON.   
+
+All available predictions are currently using the demo dataset in Vienna's Technical University student, M. Schäffer's whitepaper, about the "Performance and Scalability of Private Ethereum Blockchains". Markus and his team ran thousands of measurements to surface the the insights below.
+
+![research_m-schaffer_tuw.jpg](resources/research_m-schaffer_tuw.jpg)
+
+As this platform evolves with the feedback of the community, more performance measurements from different applications, networks and systems will be added to the list of available demonstration datasets (e.g. Substrate / Polkadot performance measurements).
+
+## Dealing with prediction failures
+
+Nobel Prize recipient and quantum physicist Niels Bohr used to say that **"Prediction is very difficult, especially when it's about the future."**
+
+In the realm of Data Science, it's important to embrace that predictions can fail. In our experience, there are two main reasons for that :
+
+**1. Bad performance measurements**
+
+Predictions can fail if they detect uncommon patterns in the performance measurements they process. It is important to always chart your measurements once, and remove noisy coordinates from your mesurements, before submitting them to the predictive engine.
+
+Sometimes, what appears to be a clean set of measurements is in fact a perfectly wrong series of measurements.
+Rethinking your entire performance testing protocol might help in such case.
+
+**2. Wrong mathematical models**
+
+Predictions can fail if we try to fit performance measurements to the wrong mathematical models, or if we use the wrong mathematical functions to this model in the code (e.g. `nls` versus `nlxb` nonlinear regression functions in R).
+
+In the future, it would make sense to increase the number of mathematical models available in this repository.
+
+## Contention & Coherency
+
+All systems experience contention and coherency penalties, undermining their ability to scale. The mathematical models we are using lets you quantify these penalties, to surface general areas of improvement of the system's capacity, latency and overall scalability.
+
+Contention is a state of conflict over access to a shared resource (e.g conflicting DApp transactions accessing the same data region). It forces transactions to be dealt with in a serialized way.   
+
+Coherency is a state where the data in a cache is up to date with the system's memory. Ensuring it requires extra, costly synchronisation efforts from your system.
+
+We would suggest adding scalability bottlenecks checks to a CI/CD pipeline, to validate the scalability of builds before they're deployed to production.
+
 ## TODO
+
+Below are some of the things we thought of adding to the scope of the platform, as we were developing this first version. Provided they match what the community would like to do moving forward, they will be properly turn into issues in due time.
 
 ### Benchmarking
 
-- Add more sample Substrate / Polkadot benchmark datasets
+- Properly thank Markus and his team for his great work with the thesis
+- Add more sample Substrate / Polkadot and other blockchain benchmark datasets
 
 ### Predictive analysis
 
 - Describe the mathematical models currently used in the platform
 - Finish implementing the `makePrediction` mutation
+
+### Visualization
+
+- Enable user benchmark payload input on `willitscale-client`
+- Compare the scalability of different blockchain on `willitscale-client`
+
+### Typings
+
+- Use `npm run codegen` to generate TypeScript code from the `willitscale-api` GraphQL schema
+- Implement type checks in the `willitscale-client` and `willitscale-api`
 
 ### Containerization
 
@@ -233,15 +282,21 @@ Your client should be now running at **[http://localhost:8080](http://localhost:
 
 ### Deployment
 
-- Add infrastructure as code scripts to deploy the platform on Kubernetes / GKE
+- Add deployment information to the README
 
-### Typings
-
-- Use `npm run codegen` to generate TypeScript code from the `willitscale-api` GraphQL schema
-- Implement type checks in the `willitscale-client` and `willitscale-api`
 
 ## About Stacktical (DSLA Protocol)
 
-![stacktical_logo_v2-dark.png](resources/stacktical_logo_v2-dark.png)
+[<p align="center">
+  <img src="https://storage.googleapis.com/stacktical-public/stacktical_logo_v2-dark.png" width="512" title="Stacktical (DSLA Protocol)">
+</p>](https://stacktical.com)
 
-### Outsourcing application and network services exposes you and your users to service disruptions. Use DSLA Network or implement DSLA Protocol, to mitigate third party outsourcing using peer-to-peer, electronic SLA contracts and cryptocurrencies. [Learn more](https://stacktical.com)
+Stacktical is a french fintech company specialized in IT Service Management (ITSM) and IT Service Governance. 
+
+Their flagship product, [DSLA Protocol](https://stacktical.com), is an autonomous blockchain protocol to document, bargain and enforce service commitments between third party service providers and their customers, using peer-to-peer, electronic Service Level Agreement (SLA) contracts.
+
+As outsourcing application and network services increasingly expose individuals and corporations to service disruptions, DSLA Protocol enables outsourced third party service providers to offer verifiable, more transparent service level guarantees to their customers, to continuously adapt to changing service level needs, and to gracefully mitigate the economic impact of bad service levels using the DSLA cryptocurrency token. 
+
+For more information about Stacktical and DSLA, please go to [stacktical.com](https://stacktical.com)
+
+

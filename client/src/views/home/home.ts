@@ -125,7 +125,7 @@ export default class Home extends Vue {
               fontColor: 'white',
               padding: 10,
               callback: function(value, index, values) {
-                return value + ' ms';
+                return value + ' s';
               }
             }
           }
