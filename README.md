@@ -1,3 +1,5 @@
+![willitscale-polkadot](https://storage.googleapis.com/stacktical-public/willitscale-polkadot.jpg)
+
 # But will it scale ?
 
 `"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**. This open source development initiative is the result of the combined efforts of the [Stacktical (DSLA Protocol)](https://stacktical.com) and Parity / Polkadot teams.
