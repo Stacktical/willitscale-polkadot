@@ -2,11 +2,11 @@
 
 # But will it scale ?
 
-`"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**. This open source development initiative is the result of the combined efforts of the [Stacktical (DSLA Protocol)](https://stacktical.com) and Parity / Polkadot teams.
+`"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**. This open source development initiative is the result of the combined efforts of the [Stacktical (DSLA Protocol)](https://stacktical.com) and [Parity (Polkadot)](https://polkadot.network/) teams.
 
 ## Objective
 
-The initial objective of this project is to surface mathematical relations between the performance metrics of blockchain networks, with a focus on [Polkadot](https://polkadot.network/), the driving force of interoperability in the blockchain industry (ergo the foundation of increasingly complex, end-to-end, cross-chain testing scenarios).
+The initial objective of this project is to surface mathematical relations between the performance metrics of blockchain networks, with a focus on Polkadot, the driving force of interoperability in the blockchain industry (ergo the foundation of increasingly complex, end-to-end, cross-chain testing scenarios).
 
 When the value of two system metrics seem to vary in relation to each other, it becomes possible to use them as mathematical coordinates, and fit these coordinates into predictive mathematical models. 
 
@@ -289,9 +289,9 @@ Below are some of the things we thought of adding to the scope of the platform, 
 
 ## About Stacktical (DSLA Protocol)
 
-[<p align="center">
+<p align="center">
   <img src="https://storage.googleapis.com/stacktical-public/stacktical_logo_v2-dark.png" width="512" title="Stacktical (DSLA Protocol)">
-</p>](https://stacktical.com)
+</p>
 
 Stacktical is a french fintech company specialized in IT Service Management (ITSM) and IT Service Governance. 
 
