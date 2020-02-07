@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: willitscale-r-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: willitscale-r-server
+  template:
+    metadata:
+      labels:
+        app: willitscale-r-server
+    spec:
+      containers:
+        - name: willitscale-r-server
+          image: stacktical/willitscale-r-server:1.0
+          ports:
+            - containerPort: 6311
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: willitscale-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: willitscale-api
+  template:
+    metadata:
+      labels:
+        app: willitscale-api
+    spec:
+      containers:
+        - name: willitscale-api
+          image: stacktical/willitscale-api:1.0
+          ports:
+          - containerPort: 10000
+          env:
+            - name: SERVICE_R_HOST
+              value: "willitscale-r-server"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: willitscale-api
+spec:
+  selector:
+    app: willitscale-api
+  ports:
+    - protocol: TCP
+      port: 10000
+      targetPort: 10000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: willitscale-r-server
+spec:
+  selector:
+    app: willitscale-r-server
+  ports:
+    - protocol: TCP
+      port: 10001
+      targetPort: 6311 
+      
