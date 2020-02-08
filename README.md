@@ -2,7 +2,7 @@
 
 # But will it scale ?
 
-`"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**. This open source development initiative is the result of the combined efforts of the [Stacktical (DSLA Protocol)](https://stacktical.com) and [Parity (Polkadot)](https://polkadot.network/) teams.
+`"Will it scale ?"` is an open source Predictive Analysis Platform that enables you to engineer **scalable** distributed applications, networks and other systems, **by applying mathematical models to bytesized performance measurements**. This initiative is the product of 3 years of R&D at [Stacktical (DSLA Protocol)](https://stacktical.com), and our hands-on experience with capacity planning in cloud computing environments. We are proud to make it public, for everyone to enjoy, direct our efforts towards the blockchain industry.
 
 ## Objective
 
