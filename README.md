@@ -147,6 +147,12 @@ mutation {
   )
 }
 ```
+  
+Where:  
+
+* p represents **concurrency** (e.g. validating nodes in the network)
+* Rt represents **latency** (e.g. transaction latency in seconds)
+* Xp represents **throughput** (e.g. transactions per second)
 
 The result pane should now be displaying a stringified JSON object comprised of `nodes vs throughput` points coordinates and other information, predicted from the specified payload. 
 
