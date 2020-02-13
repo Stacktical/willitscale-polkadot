@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: willitscale-r-server
-          image: stacktical/willitscale-r-server:1.0
+          image: stacktical/willitscale-r-server:1.1
           ports:
             - containerPort: 6311
 ---

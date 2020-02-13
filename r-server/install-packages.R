@@ -4,7 +4,6 @@ install.packages("ggplot2")
 
 library("versions")
 install.versions("jsonlite","1.3")
-install.versions("rstan","2.17.3")
 
 install.packages("nlmrt")
 
