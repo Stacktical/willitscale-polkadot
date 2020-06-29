@@ -1,0 +1,23 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: willitscale-polkadot
+build:
+  local:
+    push: false
+  artifacts:
+  - image: stacktical/willitscale-client
+    context: client
+  - image: stacktical/willitscale-api
+    context: api
+  - image: stacktical/willitscale-r-server
+    context: r-server
+deploy:
+  kubectl:
+    manifests:
+    - k8s/*.yaml
+portForward:
+  - resourceType: service
+    resourceName: willitscale-api
+  - resourceType: service
+    resourceName: willitscale-r-server

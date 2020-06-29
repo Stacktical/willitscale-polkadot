@@ -49,6 +49,22 @@ You will need to build and run these components to run your end-to-end predictio
 
 # Local Deployment
 
+## Using Skaffold
+
+**Requirements:**
+
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
+
+Built the images and run against a local kind cluster:
+
+```bash
+kind create cluster --name willitscale-polkadot
+skaffold run --port-forward
+```
+
+You can then jump to [Verify installation](###-Verify-installation)
+
 ## willitscale-r-server
 
 ### Building your R Server
@@ -190,13 +206,13 @@ A functional Kubernetes cluster (GKE, EKS, minikube, etc) accessible through kub
 
 To create a new deployment run the following command from the root folder of this repository:  
 
-`kubectl create -f ops/kubernetes.deployment.yaml`
+`kubectl create -f k8s/kubernetes.deployment.yaml`
 
 This will automatically pull the  `willitscale-r-server` and `willitscale-api` from the Docker registry.
 
 ## Access the remote cluster locally
 
-If you still want the GraphQL Playground to be reachable locally at `http://localhost:10000`, use:  
+If you still want the GraphQL Playground to be reachable locally at `http://localhost:10000`, use:
 
 ` kubectl port-forward svc/willitscale-api 10000:10000`
 

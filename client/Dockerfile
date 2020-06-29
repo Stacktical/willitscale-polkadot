@@ -19,13 +19,13 @@ COPY . .
 RUN npm run build -- --mode $NODE_ENV
 
 # Production Stage
-FROM nginx:1.17.0 as production-stage
+FROM nginx:1.19.0 as production-stage
 
 ENV PORT=9999
 
 COPY --from=build-stage /var/www/willitscale-client/dist /var/www/willitscale-client/public/dist
-COPY ops/nginx.conf_base /etc/nginx/nginx.conf
-ADD ops/nginx.conf ops/.htpasswd /etc/nginx/conf.d/
+#COPY ops/nginx.conf_base /etc/nginx/nginx.conf
+ADD conf/nginx.conf /etc/nginx/conf.d/
 
 RUN chown nginx:nginx /var/www/willitscale-client/public/dist
 
