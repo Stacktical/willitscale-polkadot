@@ -1,6 +1,6 @@
 const colors = require('colors');
 const rio = require('rio');
-const RHost = process.env.SERVICE_R_HOST || 'willitscale-r-server';
+const RHost = process.env.SERVICE_R_HOST || '0.0.0.0';
 const RPort = process.env.SERVICE_R_PORT || 10001;
 const demoBenchmark = require('../demo/benchmark');
 

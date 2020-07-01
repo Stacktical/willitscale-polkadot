@@ -49,23 +49,12 @@ You will need to build and run these components to run your end-to-end predictio
 
 # Local Deployment
 
-## Using Skaffold
-
-**Requirements:**
-
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
-
-Built the images and run against a local kind cluster:
-
-```bash
-kind create cluster --name willitscale-polkadot
-skaffold run --port-forward
-```
-
-You can then jump to [Verify installation](###-Verify-installation)
-
 ## willitscale-r-server
+
+## Preparations
+
+Set the docker bridge network
+`docker network create --driver bridge willitscale-polkadot`
 
 ### Building your R Server
 
@@ -79,7 +68,7 @@ To build your container, use the following command in the root folder of your co
 By default, the R server runs on the 6311 port, inside your Docker container.
 To run your container by mapping the 6311 port in Docker to the 10001 port in your machine, use the following command:
 
-`docker run -d -p 10001:6311 -t -P --name willitscale-r-server willitscale-r-server`
+`docker run -d -p 10001:6311 -t -P --network=willitscale-polkadot --name willitscale-r-server willitscale-r-server`
 
 Your server should be now running on the **10001 port.**
 
@@ -116,7 +105,8 @@ Set the environment variable and run the server using the following command:
 #### In Docker
 
 Run the server using the following Docker command:
-`docker run -p 10000:10000 -v $(pwd)/dist/:/var/www/willitscale-api/public/dist/ --name willitscale-api willitscale-api`
+`docker run -p 10000:10000 -v $(pwd)/dist/:/var/www/willitscale-api/public/dist/ --network=willitscale-polkadot -e SERVICE_R_HOST=willitscale-r-server -e SERVICE_R_PORT=6311 --name willitscale-api willitscale-api`
+
 
 Your server should be now running on the **10000 port.**
 
