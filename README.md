@@ -49,21 +49,38 @@ You will need to build and run these components to run your end-to-end predictio
 
 # Local Deployment
 
-## willitscale-r-server
+## Automated Deployment (TL;DR)
 
-## Preparations
+Install the following tools :
 
-Set the docker bridge network
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
+
+Built the images and run against a local **kind** cluster using the following command :
+
+```bash
+kind create cluster --name willitscale-polkadot
+skaffold run --port-forward
+```
+
+## Manual Deployment
+
+### Reachability
+
+Ensure that docker containers can communicate with each other by setting up the docker bridge network: 
+
 `docker network create --driver bridge willitscale-polkadot`
 
-### Building your R Server
+### willitscale-r-server
+
+#### Building your R Server
 
 The `willitscale-r-server` is designed to run inside a Docker container.  
 To build your container, use the following command in the root folder of your component.
 
 `docker build -t willitscale-r-server .`
 
-### Running your R Server
+#### Running your R Server
 
 By default, the R server runs on the 6311 port, inside your Docker container.
 To run your container by mapping the 6311 port in Docker to the 10001 port in your machine, use the following command:
@@ -72,37 +89,37 @@ To run your container by mapping the 6311 port in Docker to the 10001 port in yo
 
 Your server should be now running on the **10001 port.**
 
-## willitscale-api
+### willitscale-api
 
-### Install dependencies
+#### Install dependencies
 
 We are using npm to manage dependencies for the `willitscale-api` API server.
 
 **If you plan on using the server locally,** simply use `npm install` from the `willitscale-api` folder.  
 **If you plan to host it instead**, the Dockerfile will take care of installing dependencies for you, while building the container.
 
-### Building your GraphQL API Server
+#### Building your GraphQL API Server
 
 You can either build the server locally using npm, or build your server as a Docker container for further deployment (e.g. in Kubernetes).
 
-#### Locally
+##### Locally
 
 Set the environment variable and build the server using the following command:  
 `NODE_ENV="development" npm run build`
 
-#### In Docker
+##### In Docker
 
 Build the server using the following Docker command:  
 `docker build -t willitscale-api . --build-arg NODE_ENV=development`
 
-### Running your GraphQL API Server
+#### Running your GraphQL API Server
 
-#### Locally
+##### Locally
 
 Set the environment variable and run the server using the following command:  
 `NODE_ENV="development" npm run start`
 
-#### In Docker
+##### In Docker
 
 Run the server using the following Docker command:
 `docker run -p 10000:10000 -v $(pwd)/dist/:/var/www/willitscale-api/public/dist/ --network=willitscale-polkadot -e SERVICE_R_HOST=willitscale-r-server -e SERVICE_R_PORT=6311 --name willitscale-api willitscale-api`
@@ -110,7 +127,26 @@ Run the server using the following Docker command:
 
 Your server should be now running on the **10000 port.**
 
-### Verify installation
+### willitscale-client (optional)
+
+`willitscale-client` provides a simple way to visualize and plot the predictions returned by the `willitscale-api`, in your browser.
+
+#### Install dependencies
+
+We are using npm to manage dependencies for the `willitscale-client` API client.  
+Simply use `npm install` from the `willitscale-client` folder to install them.
+
+#### Serve the client locally
+
+Make sure `willitscale-r-server` and `willitscale-api` are running, then set the environment variable and run `willitscale-client` using the following command:  
+
+`NODE_ENV="development" npm run serve`
+
+Your client should be now running at **[http://localhost:8080](http://localhost:8080)**.
+
+![willitiscale-client.png](resources/willitscale-client.png)
+
+## Verify installation
 
 Now that both our HTTP R server and GraphQL API are running, it is time to try running a prediction.
 
@@ -165,26 +201,6 @@ The result pane should now be displaying a stringified JSON object comprised of 
 Here is what the console looks like when you run a prediction: 
 
 ![willitiscale-api.png](resources/willitscale-api.png)
-
-
-## willitscale-client (optional)
-
-`willitscale-client` provides a simple way to visualize and plot the predictions returned by the `willitscale-api`, in your browser.
-
-### Install dependencies
-
-We are using npm to manage dependencies for the `willitscale-client` API client.  
-Simply use `npm install` from the `willitscale-client` folder to install them.
-
-### Serve the client locally
-
-Make sure `willitscale-r-server` and `willitscale-api` are running, then set the environment variable and run `willitscale-client` using the following command:  
-
-`NODE_ENV="development" npm run serve`
-
-Your client should be now running at **[http://localhost:8080](http://localhost:8080)**.
-
-![willitiscale-client.png](resources/willitscale-client.png)
 
 # Remote Deployment
 
