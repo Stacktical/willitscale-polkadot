@@ -47,6 +47,10 @@ A Vue.js GraphQL API client, to submit performance test results to the `willitis
 
 You will need to build and run these components to run your end-to-end predictions scenarios.
 
+## Subsrate / Polkadot Nodes
+
+If you don't have access to a provisioned test network, we have forked the [polkadot-deployer](https://github.com/Stacktical/polkadot-deployer) project to allow you to create local or remote cloud deployments of Polkadot, and effortlessly pipe benchmarking results to the `willitscale-api`.
+
 # Local Deployment
 
 ## willitscale-r-server
