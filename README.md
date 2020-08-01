@@ -55,6 +55,7 @@ Install the following tools :
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
+- [skaffold](https://skaffold.dev/docs/install/)
 
 Built the images and run against a local **kind** cluster using the following command :
 
