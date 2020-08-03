@@ -63,5 +63,4 @@ spec:
   ports:
     - protocol: TCP
       port: 10001
-      targetPort: 6311 
-      
+      targetPort: 6311

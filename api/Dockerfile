@@ -29,4 +29,4 @@ EXPOSE $PORT
 
 CMD pm2 start /var/www/willitscale-api/pm2.json --no-daemon --env $NODE_ENV -- \
     --HOST $HOST \
-    --PORT $PORT 
+    --PORT $PORT
